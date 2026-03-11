@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>개인정보처리방침 — 곳간기록부</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0F1923;
+      --surface: #1A2332;
+      --surface2: #1e2a3d;
+      --blue: #1A73E8;
+      --blue-light: #4a9eff;
+      --text: #e8eaf0;
+      --text-muted: #8892a4;
+      --text-dim: #4a5568;
+      --border: rgba(255,255,255,0.07);
+      --gold: #FFB800;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 300;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    /* 배경 효과 */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(26,115,232,0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 헤더 */
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .app-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 8px 20px;
+      margin-bottom: 28px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .app-badge .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--blue);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .header h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .header h1 span {
+      background: linear-gradient(135deg, var(--blue), var(--blue-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header .subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .header .date {
+      display: inline-block;
+      margin-top: 16px;
+      background: rgba(26,115,232,0.1);
+      border: 1px solid rgba(26,115,232,0.2);
+      color: var(--blue-light);
+      font-size: 12px;
+      padding: 4px 14px;
+      border-radius: 20px;
+    }
+
+    /* 섹션 */
+    .section {
+      margin-bottom: 32px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .section:hover {
+      border-color: rgba(26,115,232,0.2);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 22px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-icon {
+      width: 38px;
+      height: 38px;
+      background: rgba(26,115,232,0.12);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .section-body {
+      padding: 22px 24px;
+    }
+
+    .section-body p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.9;
+      margin-bottom: 12px;
+    }
+
+    .section-body p:last-child { margin-bottom: 0; }
+
+    /* 데이터 테이블 */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 8px 0;
+    }
+
+    .data-table th {
+      text-align: left;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.04);
+      color: var(--text-muted);
+      font-weight: 500;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-table td {
+      padding: 12px 14px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .data-table tr:last-child td { border-bottom: none; }
+
+    .data-table td:first-child {
+      color: var(--text);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(26,115,232,0.15);
+      color: var(--blue-light);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 500;
+      margin-left: 6px;
+    }
+
+    .tag.safe {
+      background: rgba(52,168,83,0.15);
+      color: #4ade80;
+    }
+
+    /* 강조 박스 */
+    .highlight-box {
+      background: rgba(26,115,232,0.08);
+      border: 1px solid rgba(26,115,232,0.2);
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin: 12px 0;
+    }
+
+    .highlight-box p {
+      color: var(--blue-light) !important;
+      font-size: 13px !important;
+      margin: 0 !important;
+    }
+
+    .warn-box {
+      background: rgba(255,184,0,0.06);
+      border: 1px solid rgba(255,184,0,0.2);
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin: 12px 0;
+    }
+
+    .warn-box p {
+      color: var(--gold) !important;
+      font-size: 13px !important;
+      margin: 0 !important;
+    }
+
+    /* 목록 */
+    .list {
+      list-style: none;
+      margin: 8px 0;
+    }
+
+    .list li {
+      color: var(--text-muted);
+      font-size: 14px;
+      padding: 6px 0 6px 20px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .list li:last-child { border-bottom: none; }
+
+    .list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-size: 12px;
+    }
+
+    /* 연락처 */
+    .contact-box {
+      background: linear-gradient(135deg, rgba(26,115,232,0.1), rgba(26,115,232,0.05));
+      border: 1px solid rgba(26,115,232,0.25);
+      border-radius: 14px;
+      padding: 28px;
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    .contact-box .contact-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .contact-box h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .contact-box p {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .contact-email {
+      display: inline-block;
+      background: var(--blue);
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .contact-email:hover { opacity: 0.85; }
+
+    /* 푸터 */
+    .footer {
+      margin-top: 60px;
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .footer p {
+      color: var(--text-dim);
+      font-size: 12px;
+      line-height: 2;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 40px 16px 80px; }
+      .section-body { padding: 16px; }
+      .section-header { padding: 16px; }
+      .data-table { font-size: 12px; }
+      .data-table th, .data-table td { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- 헤더 -->
+    <div class="header">
+      <div class="app-badge">
+        <span class="dot"></span>
+        곳간기록부 개인정보처리방침
+      </div>
+      <h1>곳간기록부<br><span>개인정보처리방침</span></h1>
+      <p class="subtitle">이용자의 소중한 개인정보를 안전하게 보호합니다</p>
+      <span class="date">시행일: 2026년 3월 11일</span>
+    </div>
+
+    <!-- 1. 총칙 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">📋</div>
+        <div class="section-title">제1조 총칙</div>
+      </div>
+      <div class="section-body">
+        <p>곳간기록부(이하 "앱")은 이용자의 개인정보를 중요하게 생각하며, 「개인정보 보호법」 및 관련 법령을 준수합니다.</p>
+        <p>본 방침은 앱이 어떤 정보를 수집하고, 어떻게 사용하며, 어떻게 보호하는지 안내합니다.</p>
+        <div class="highlight-box">
+          <p>💡 곳간기록부은 개인 자산 관리 목적으로만 데이터를 사용합니다. 광고, 마케팅, 제3자 판매에 절대 활용하지 않습니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. 수집하는 정보 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">📦</div>
+        <div class="section-title">제2조 수집하는 개인정보</div>
+      </div>
+      <div class="section-body">
+        <p>앱은 서비스 제공을 위해 최소한의 정보만 수집합니다.</p>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>수집 항목</th>
+              <th>수집 방법</th>
+              <th>목적</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>이름, 이메일<span class="tag">구글 로그인</span></td>
+              <td>Google OAuth</td>
+              <td>계정 식별 및 기기 간 동기화</td>
+            </tr>
+            <tr>
+              <td>프로필 사진<span class="tag">구글 로그인</span></td>
+              <td>Google OAuth</td>
+              <td>앱 내 프로필 표시</td>
+            </tr>
+            <tr>
+              <td>자산 데이터<span class="tag safe">암호화</span></td>
+              <td>이용자 직접 입력</td>
+              <td>자산 관리 서비스 제공</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="warn-box">
+          <p>⚠️ 주민등록번호, 신용카드번호, 금융 계좌번호 등 민감한 금융정보는 수집하지 않습니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 사용 목적 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">🎯</div>
+        <div class="section-title">제3조 개인정보 이용 목적</div>
+      </div>
+      <div class="section-body">
+        <ul class="list">
+          <li>회원 식별 및 로그인 서비스 제공</li>
+          <li>자산 데이터의 기기 간 동기화 (Firebase Cloud Firestore)</li>
+          <li>실시간 주식·코인·귀금속 시세 조회</li>
+          <li>앱 오류 진단 및 서비스 개선</li>
+        </ul>
+        <div class="highlight-box">
+          <p>💡 수집된 정보는 위 목적 이외에는 사용되지 않으며, 목적이 변경될 경우 별도로 동의를 받습니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. 보관 기간 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">🗓️</div>
+        <div class="section-title">제4조 개인정보 보유 및 이용 기간</div>
+      </div>
+      <div class="section-body">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>항목</th>
+              <th>보유 기간</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>계정 정보 (이름, 이메일)</td>
+              <td>회원 탈퇴 즉시 삭제</td>
+            </tr>
+            <tr>
+              <td>자산 데이터</td>
+              <td>회원 탈퇴 즉시 삭제</td>
+            </tr>
+            <tr>
+              <td>앱 로그</td>
+              <td>최대 90일 후 자동 삭제</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 5. 제3자 제공 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">🤝</div>
+        <div class="section-title">제5조 개인정보 제3자 제공</div>
+      </div>
+      <div class="section-body">
+        <p>앱은 이용자의 개인정보를 원칙적으로 제3자에게 제공하지 않습니다.</p>
+        <p>단, 서비스 운영을 위해 아래 업체에 처리를 위탁합니다.</p>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>수탁 업체</th>
+              <th>위탁 내용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Google Firebase</td>
+              <td>데이터 저장 및 동기화 (Cloud Firestore)</td>
+            </tr>
+            <tr>
+              <td>Google OAuth</td>
+              <td>로그인 인증</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 6. 이용자 권리 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">🛡️</div>
+        <div class="section-title">제6조 이용자의 권리</div>
+      </div>
+      <div class="section-body">
+        <p>이용자는 언제든지 아래 권리를 행사할 수 있습니다.</p>
+        <ul class="list">
+          <li>개인정보 열람 요청</li>
+          <li>개인정보 수정 요청</li>
+          <li>개인정보 삭제 요청 (계정 탈퇴)</li>
+          <li>개인정보 처리 정지 요청</li>
+        </ul>
+        <div class="highlight-box">
+          <p>💡 앱 내 로그아웃 후 계정 삭제를 요청하시면 모든 데이터가 즉시 삭제됩니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. 보안 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">🔒</div>
+        <div class="section-title">제7조 개인정보 보호 조치</div>
+      </div>
+      <div class="section-body">
+        <ul class="list">
+          <li>Firebase Security Rules를 통한 접근 권한 제어</li>
+          <li>Google OAuth 2.0 기반 안전한 인증</li>
+          <li>HTTPS 암호화 통신</li>
+          <li>타인의 데이터에 접근 불가한 구조 (UID 기반 격리)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 8. 쿠키 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">🍪</div>
+        <div class="section-title">제8조 쿠키 및 자동 수집 항목</div>
+      </div>
+      <div class="section-body">
+        <p>앱은 별도의 쿠키를 사용하지 않습니다. 다만 Firebase에서 앱 성능 개선을 위한 익명 통계를 자동 수집할 수 있습니다.</p>
+      </div>
+    </div>
+
+    <!-- 9. 아동 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">👶</div>
+        <div class="section-title">제9조 만 14세 미만 아동 보호</div>
+      </div>
+      <div class="section-body">
+        <p>본 앱은 만 14세 미만 아동의 사용을 제한합니다. 만 14세 미만 아동의 개인정보가 수집된 사실을 인지한 경우 즉시 삭제합니다.</p>
+      </div>
+    </div>
+
+    <!-- 10. 방침 변경 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">📢</div>
+        <div class="section-title">제10조 개인정보처리방침 변경</div>
+      </div>
+      <div class="section-body">
+        <p>본 방침은 법령 또는 서비스 변경에 따라 수정될 수 있습니다. 변경 시 앱 내 공지 또는 본 페이지를 통해 사전 안내합니다.</p>
+        <p>시행일: <strong style="color:#fff">2026년 3월 11일</strong></p>
+      </div>
+    </div>
+
+    <!-- 연락처 -->
+    <div class="contact-box">
+      <div class="contact-icon">✉️</div>
+      <h3>개인정보 관련 문의</h3>
+      <p>개인정보 처리에 관한 문의, 불만, 피해 신고는 아래로 연락해 주세요.</p>
+      <a href="mailto:chorok131@gmail.com" class="contact-email">chorok131@gmail.com</a>
+    </div>
+
+    <!-- 푸터 -->
+    <div class="footer">
+      <p>곳간기록부 · 개인정보처리방침</p>
+      <p>© 2026 곳간기록부. All rights reserved.</p>
+    </div>
+
+  </div>
+</body>
+</html>
