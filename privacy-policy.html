@@ -30,7 +30,6 @@
       min-height: 100vh;
     }
 
-    /* 배경 효과 */
     body::before {
       content: '';
       position: fixed;
@@ -51,7 +50,6 @@
       z-index: 1;
     }
 
-    /* 헤더 */
     .header {
       text-align: center;
       margin-bottom: 60px;
@@ -116,7 +114,6 @@
       border-radius: 20px;
     }
 
-    /* 섹션 */
     .section {
       margin-bottom: 32px;
       background: var(--surface);
@@ -169,7 +166,6 @@
 
     .section-body p:last-child { margin-bottom: 0; }
 
-    /* 데이터 테이블 */
     .data-table {
       width: 100%;
       border-collapse: collapse;
@@ -217,7 +213,6 @@
       color: #4ade80;
     }
 
-    /* 강조 박스 */
     .highlight-box {
       background: rgba(26,115,232,0.08);
       border: 1px solid rgba(26,115,232,0.2);
@@ -246,7 +241,6 @@
       margin: 0 !important;
     }
 
-    /* 목록 */
     .list {
       list-style: none;
       margin: 8px 0;
@@ -270,7 +264,6 @@
       font-size: 12px;
     }
 
-    /* 연락처 */
     .contact-box {
       background: linear-gradient(135deg, rgba(26,115,232,0.1), rgba(26,115,232,0.05));
       border: 1px solid rgba(26,115,232,0.25);
@@ -312,7 +305,6 @@
 
     .contact-email:hover { opacity: 0.85; }
 
-    /* 푸터 */
     .footer {
       margin-top: 60px;
       padding-top: 30px;
@@ -346,7 +338,7 @@
       </div>
       <h1>곳간기록부<br><span>개인정보처리방침</span></h1>
       <p class="subtitle">이용자의 소중한 개인정보를 안전하게 보호합니다</p>
-      <span class="date">시행일: 2026년 3월 11일</span>
+      <span class="date">시행일: 2026년 3월 16일</span>
     </div>
 
     <!-- 1. 총칙 -->
@@ -359,7 +351,7 @@
         <p>곳간기록부(이하 "앱")은 이용자의 개인정보를 중요하게 생각하며, 「개인정보 보호법」 및 관련 법령을 준수합니다.</p>
         <p>본 방침은 앱이 어떤 정보를 수집하고, 어떻게 사용하며, 어떻게 보호하는지 안내합니다.</p>
         <div class="highlight-box">
-          <p>💡 곳간기록부은 개인 자산 관리 목적으로만 데이터를 사용합니다. 광고, 마케팅, 제3자 판매에 절대 활용하지 않습니다.</p>
+          <p>💡 곳간기록부은 개인 자산 관리 목적으로만 데이터를 사용합니다. 수집된 개인정보는 광고 맞춤 설정, 마케팅, 제3자 판매에 활용되지 않습니다.</p>
         </div>
       </div>
     </div>
@@ -396,6 +388,11 @@
               <td>이용자 직접 입력</td>
               <td>자산 관리 서비스 제공</td>
             </tr>
+            <tr>
+              <td>광고 식별자<span class="tag">AdMob</span></td>
+              <td>자동 수집</td>
+              <td>광고 게재 (Google AdMob)</td>
+            </tr>
           </tbody>
         </table>
         <div class="warn-box">
@@ -415,6 +412,7 @@
           <li>회원 식별 및 로그인 서비스 제공</li>
           <li>자산 데이터의 기기 간 동기화 (Firebase Cloud Firestore)</li>
           <li>실시간 주식·코인·귀금속 시세 조회</li>
+          <li>앱 광고 게재 (Google AdMob)</li>
           <li>앱 오류 진단 및 서비스 개선</li>
         </ul>
         <div class="highlight-box">
@@ -469,16 +467,29 @@
             <tr>
               <th>수탁 업체</th>
               <th>위탁 내용</th>
+              <th>개인정보처리방침</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Google Firebase</td>
               <td>데이터 저장 및 동기화 (Cloud Firestore)</td>
+              <td><a href="https://policies.google.com/privacy" style="color:var(--blue-light)">보기</a></td>
             </tr>
             <tr>
               <td>Google OAuth</td>
               <td>로그인 인증</td>
+              <td><a href="https://policies.google.com/privacy" style="color:var(--blue-light)">보기</a></td>
+            </tr>
+            <tr>
+              <td>Google AdMob</td>
+              <td>광고 게재, 광고 식별자 및 기기 정보 처리</td>
+              <td><a href="https://policies.google.com/privacy" style="color:var(--blue-light)">보기</a></td>
+            </tr>
+            <tr>
+              <td>Google Play 결제</td>
+              <td>인앱결제 처리 (결제 정보는 앱이 수집하지 않음)</td>
+              <td><a href="https://policies.google.com/privacy" style="color:var(--blue-light)">보기</a></td>
             </tr>
           </tbody>
         </table>
@@ -521,37 +532,79 @@
       </div>
     </div>
 
-    <!-- 8. 쿠키 -->
+    <!-- 8. 광고 서비스 (신규) -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">📣</div>
+        <div class="section-title">제8조 광고 서비스 (Google AdMob)</div>
+      </div>
+      <div class="section-body">
+        <p>본 앱은 Google AdMob을 통해 광고를 제공합니다. 광고 게재 과정에서 아래 정보가 Google에 전송될 수 있습니다.</p>
+        <ul class="list">
+          <li>광고 식별자 (Google Advertising ID, GAID)</li>
+          <li>기기 정보 (OS 버전, 기기 모델 등)</li>
+          <li>앱 사용 정보 (광고 노출·클릭 통계)</li>
+        </ul>
+        <div class="highlight-box">
+          <p>💡 기기 설정 → Google → 광고 → "광고 맞춤 설정 선택 해제"를 통해 맞춤형 광고를 거부할 수 있습니다.</p>
+        </div>
+        <div class="warn-box">
+          <p>⚠️ 광고 관련 데이터 처리는 Google의 개인정보처리방침을 따릅니다. (policies.google.com/privacy)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. 인앱결제 (신규) -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">💳</div>
+        <div class="section-title">제9조 인앱결제</div>
+      </div>
+      <div class="section-body">
+        <p>본 앱은 Google Play 인앱결제를 통해 유료 기능을 제공합니다.</p>
+        <ul class="list">
+          <li>모든 결제는 Google Play에서 직접 처리됩니다</li>
+          <li>카드번호, 계좌번호 등 결제 정보는 앱이 수집하거나 저장하지 않습니다</li>
+          <li>결제 내역 및 영수증은 Google Play에서 확인하실 수 있습니다</li>
+          <li>구독 해지 및 환불은 Google Play 정책을 따릅니다</li>
+        </ul>
+        <div class="highlight-box">
+          <p>💡 결제 관련 문의는 Google Play 고객센터 또는 아래 이메일로 연락해 주세요.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. 쿠키 -->
     <div class="section">
       <div class="section-header">
         <div class="section-icon">🍪</div>
-        <div class="section-title">제8조 쿠키 및 자동 수집 항목</div>
+        <div class="section-title">제10조 쿠키 및 자동 수집 항목</div>
       </div>
       <div class="section-body">
         <p>앱은 별도의 쿠키를 사용하지 않습니다. 다만 Firebase에서 앱 성능 개선을 위한 익명 통계를 자동 수집할 수 있습니다.</p>
       </div>
     </div>
 
-    <!-- 9. 아동 -->
+    <!-- 11. 아동 -->
     <div class="section">
       <div class="section-header">
         <div class="section-icon">👶</div>
-        <div class="section-title">제9조 만 14세 미만 아동 보호</div>
+        <div class="section-title">제11조 만 14세 미만 아동 보호</div>
       </div>
       <div class="section-body">
         <p>본 앱은 만 14세 미만 아동의 사용을 제한합니다. 만 14세 미만 아동의 개인정보가 수집된 사실을 인지한 경우 즉시 삭제합니다.</p>
       </div>
     </div>
 
-    <!-- 10. 방침 변경 -->
+    <!-- 12. 방침 변경 -->
     <div class="section">
       <div class="section-header">
         <div class="section-icon">📢</div>
-        <div class="section-title">제10조 개인정보처리방침 변경</div>
+        <div class="section-title">제12조 개인정보처리방침 변경</div>
       </div>
       <div class="section-body">
         <p>본 방침은 법령 또는 서비스 변경에 따라 수정될 수 있습니다. 변경 시 앱 내 공지 또는 본 페이지를 통해 사전 안내합니다.</p>
-        <p>시행일: <strong style="color:#fff">2026년 3월 11일</strong></p>
+        <p>시행일: <strong style="color:#fff">2026년 3월 16일</strong></p>
       </div>
     </div>
 
